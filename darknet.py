@@ -131,11 +131,15 @@ def print_detections(detections, coordinates=False):
 def draw_boxes(detections, image, colors):
     import cv2
     for label, confidence, bbox in detections:
-        left, top, right, bottom = bbox2points(bbox)
-        cv2.rectangle(image, (left, top), (right, bottom), colors[label], 1)
-        cv2.putText(image, "{} [{:.2f}]".format(label, float(confidence)),
-                    (left, top - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5,
-                    colors[label], 2)
+	print('draw boxes')
+	print(confidence)
+	print(type(confidence))
+	if float(confidence) > 0.75:
+		left, top, right, bottom = bbox2points(bbox)
+		cv2.rectangle(image, (left, top), (right, bottom), colors[label], 1)
+		cv2.putText(image, "{} [{:.2f}]".format(label, float(confidence)),
+		            (left, top - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5,
+		            colors[label], 2)
     return image
 
 
